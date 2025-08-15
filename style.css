@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  background-color: #f5f3ef;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  position: relative;
+}
+.header-img {
+  width: 100%;
+  height: auto;
+}
+.panier-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background-color: #1a1a1a;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: transform 0.3s, background 0.3s;
+}
+.panier-btn:hover {
+  background-color: #333;
+}
+.panier-btn.animate {
+  animation: bounce 0.5s;
+}
+@keyframes bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.2); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+
+.produits {
+  padding: 40px;
+  text-align: center;
+}
+.grille-produits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+.produit {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.produit:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.produit img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+.produit img:hover {
+  transform: scale(1.05);
+}
+.prix {
+  color: #a88a5a;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.ajout-panier {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.ajout-panier:hover {
+  background-color: #333;
+}
+
+
+.popup-panier {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  display: none;
+  z-index: 1000;
+  width: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.popup-panier.active {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+.popup-panier::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: -1;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.popup-panier.active::before {
+  opacity: 1;
+}
+
+
+.btn-payer, .btn-fermer, .supprimer {
+  margin: 5px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-payer {
+  background-color: #1a1a1a;
+  color: white;
+}
+.btn-payer:hover {
+  background-color: #333;
+}
+.btn-fermer {
+  background-color: #aaa;
+  color: white;
+}
+.btn-fermer:hover {
+  background-color: #888;
+}
+.supprimer {
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+.supprimer:hover {
+  background-color: #cc0000;
+}

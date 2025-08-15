@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ma Boutique</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+</head>
+<body>
+
+  <header class="header">
+    <img src="header.png" alt="Logo" class="header-img">
+    <button id="btn-panier" class="panier-btn">Panier (0)</button>
+  </header>
+
+  <section class="produits">
+    <h2>Nos sneakers</h2>
+    <div id="grille-produits" class="grille-produits">
+    </div>
+  </section>
+
+  <div id="popup-panier" class="popup-panier">
+    <h3>Votre Panier</h3>
+    <ul id="liste-panier"></ul>
+    <p id="total-panier">Total : 0 FCFA</p>
+    <button id="payer" class="btn-payer">Payer maintenant</button>
+    <button id="fermer-panier" class="btn-fermer">Fermer</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
