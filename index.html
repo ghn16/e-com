@@ -1,31 +1,276 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ma Boutique</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Sneakers - Boutique Exclusive</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="header">
-    <img src="header.png" alt="Logo" class="header-img">
-    <button id="btn-panier" class="panier-btn">Panier (0)</button>
+    <div class="header-left">
+      <div class="logo">
+        <svg width="40" height="40" viewBox="0 0 40 40">
+          <path d="M5 25 L15 15 L25 20 L35 10" stroke="#9AFF00" stroke-width="3" fill="none"/>
+          <circle cx="15" cy="15" r="2" fill="#9AFF00"/>
+        </svg>
+        <span class="logo-text">MON<span class="logo-accent">SNEAKERS</span></span>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="#" class="nav-link active" data-page="shop">BOUTIQUE</a>
+      <a href="#" class="nav-link" id="admin-link">
+        <span id="admin-text">ADMIN</span>
+        <span id="logout-text" style="display:none;">DÉCONNEXION</span>
+      </a>
+    </nav>
+
+    <div class="header-right">
+      <button id="btn-panier" class="icon-btn panier-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="badge">0</span>
+      </button>
+    </div>
   </header>
 
-  <section class="produits">
-    <h2>Nos sneakers</h2>
-    <div id="grille-produits" class="grille-produits">
-    </div>
-  </section>
+  <!-- PAGE BOUTIQUE -->
+  <div id="page-shop" class="page-content active">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <span class="badge-hero">NOUVEAUTÉ</span>
+          <h1>
+            SNEAKERS<br>
+            <span class="text-accent">EXCLUSIVES</span>
+          </h1>
+          <p class="hero-description">
+            Nouveautés, dropes exclusifs<br>
+            & éditions limitées.
+          </p>
+          <button class="btn-primary" onclick="document.querySelector('.produits').scrollIntoView({behavior:'smooth'})">
+            ACHETER MAINTENANT
+          </button>
+          
+          <div class="payment-badges">
+            <span class="payment-badge">✓ Paiement sécurisé</span>
+            <span class="payment-badge">Visa</span>
+            <span class="payment-badge"> Mastercard</span>
+            <span class="payment-badge"> Mobile Money</span>
+          </div>
+        </div>
 
+        <div class="hero-image">
+          <div class="glow-effect"></div>
+          <div class="hero-placeholder">
+            <svg width="400" height="400" viewBox="0 0 400 400">
+              <defs>
+                <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#9AFF00;stop-opacity:0.8" />
+                  <stop offset="100%" style="stop-color:#9AFF00;stop-opacity:0.2" />
+                </linearGradient>
+              </defs>
+              <ellipse cx="200" cy="200" rx="150" ry="80" fill="url(#glow)" opacity="0.3">
+                <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="20s" repeatCount="indefinite"/>
+              </ellipse>
+              <text x="200" y="200" font-family="Inter, sans-serif" font-size="48" font-weight="900" fill="#9AFF00" text-anchor="middle" dominant-baseline="middle">
+                SNEAKERS
+              </text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFICES -->
+    <section class="benefices">
+      <div class="benefice-card">
+        <div class="benefice-icon"></div>
+        <div class="benefice-text">
+          <strong>Livraison rapide gratuite</strong>
+        </div>
+      </div>
+      <div class="benefice-card">
+        <div class="benefice-icon"></div>
+        <div class="benefice-text">
+          <strong>Paiement sécurisé</strong>
+        </div>
+      </div>
+      <div class="benefice-card">
+        <div class="benefice-icon"></div>
+        <div class="benefice-text">
+          <strong>Retours 30 jours</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTRES & PRODUITS -->
+    <section class="produits" id="nouveautes">
+      <div class="produits-header">
+        <h2 class="section-title">NOS SNEAKERS</h2>
+        
+        <div class="filtres">
+          <div class="filtre-groupe">
+            <label>Budget :</label>
+            <select id="filtre-budget">
+              <option value="all">Tous les prix</option>
+              <option value="0-50000">0 - 50 000 FCFA</option>
+              <option value="50000-100000">50 000 - 100 000 FCFA</option>
+              <option value="100000-150000">100 000 - 150 000 FCFA</option>
+              <option value="150000-999999">Plus de 150 000 FCFA</option>
+            </select>
+          </div>
+
+          <div class="filtre-groupe">
+            <label>Trier par :</label>
+            <select id="filtre-tri">
+              <option value="default">Par défaut</option>
+              <option value="prix-asc">Prix croissant</option>
+              <option value="prix-desc">Prix décroissant</option>
+              <option value="nom">Nom A-Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="grille-produits" class="grille-produits"></div>
+      
+      <!-- PAGINATION -->
+      <div class="pagination" id="pagination">
+        <button class="pagination-btn" id="prev-page">← Précédent</button>
+        <div class="pagination-numbers" id="pagination-numbers"></div>
+        <button class="pagination-btn" id="next-page">Suivant →</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAGE ADMIN -->
+  <div id="page-admin" class="page-content">
+    <!-- LOGIN ADMIN -->
+    <div id="admin-login" class="admin-login">
+      <div class="login-card">
+        <div class="login-header">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="28" fill="none" stroke="#9AFF00" stroke-width="2"/>
+            <path d="M30 15 L30 30 L40 40" stroke="#9AFF00" stroke-width="3" fill="none"/>
+          </svg>
+          <h2>Connexion Admin</h2>
+          <p>Accès réservé aux administrateurs</p>
+        </div>
+        
+        <form id="form-login" class="login-form">
+          <div class="form-group">
+            <label> Nom d'utilisateur</label>
+            <input type="text" id="login-username" required placeholder="admin" autocomplete="username">
+          </div>
+          
+          <div class="form-group">
+            <label> Mot de passe</label>
+            <input type="password" id="login-password" required placeholder="••••••••" autocomplete="current-password">
+          </div>
+          
+          <div id="login-error" class="login-error"></div>
+          
+          <button type="submit" class="btn-login">Se connecter</button>
+          
+          <div class="login-hint">
+            <small></small>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- PANNEAU ADMIN (caché par défaut) -->
+    <section id="admin-panel" class="admin-container" style="display:none;">
+      <div class="admin-header">
+        <h2 class="section-title"> PANNEAU ADMINISTRATEUR</h2>
+        <button id="btn-logout" class="btn-logout"> Déconnexion</button>
+      </div>
+      
+      <div class="admin-content">
+        <!-- FORMULAIRE AJOUT PRODUIT -->
+        <div class="admin-card">
+          <h3> Ajouter un produit</h3>
+          <form id="form-produit" class="admin-form">
+            <div class="form-group">
+              <label>Nom du produit *</label>
+              <input type="text" id="input-nom" required placeholder="Ex: Nike Air Max 90">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Prix (FCFA) *</label>
+                <input type="number" id="input-prix" required placeholder="55000">
+              </div>
+
+              <div class="form-group">
+                <label>Prix ancien (FCFA)</label>
+                <input type="number" id="input-prix-ancien" placeholder="75000">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Réduction (%)</label>
+                <input type="number" id="input-promo" min="0" max="100" placeholder="30">
+              </div>
+
+              <div class="form-group">
+                <label>Note ⭐</label>
+                <select id="input-rating">
+                  <option value="5">⭐⭐⭐⭐⭐</option>
+                  <option value="4">⭐⭐⭐⭐</option>
+                  <option value="3">⭐⭐⭐</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>URL de l'image *</label>
+              <input type="text" id="input-image" required placeholder="1.png ou https://...">
+            </div>
+
+            <div class="form-group">
+              <label>Nombre d'avis</label>
+              <input type="number" id="input-reviews" placeholder="234">
+            </div>
+
+            <button type="submit" class="btn-admin-primary"> Ajouter le produit</button>
+          </form>
+        </div>
+
+        <!-- LISTE DES PRODUITS -->
+        <div class="admin-card">
+          <h3> Produits en boutique (<span id="count-produits">0</span>)</h3>
+          <div class="admin-produits-liste" id="admin-produits-liste"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- OVERLAY -->
+  <div id="popup-overlay" class="popup-overlay"></div>
+
+  <!-- POPUP PANIER -->
   <div id="popup-panier" class="popup-panier">
-    <h3>Votre Panier</h3>
+    <div class="popup-header">
+      <h3>🛒 Votre panier</h3>
+      <button id="fermer-panier" class="btn-close">✕</button>
+    </div>
+    
     <ul id="liste-panier"></ul>
-    <p id="total-panier">Total : 0 FCFA</p>
-    <button id="payer" class="btn-payer">Payer maintenant</button>
-    <button id="fermer-panier" class="btn-fermer">Fermer</button>
+    
+    <div class="popup-footer">
+      <p id="total-panier" class="total-price">Total : 0 FCFA</p>
+      <button id="payer" class="btn-payer">PAYER MAINTENANT</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
